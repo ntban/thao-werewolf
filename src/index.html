@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="parallax">
+    <div class="quote">
+      <div class="game-name">MA SÓI</div>
+      <blockquote class="introduce">
+        "...Khi ánh trăng lên cao, màn đêm buông xuống cũng là lúc lũ Ma Sói hiện nguyên hình và đi giết người. Sáng hôm sau mọi
+        người sẽ thảo luận để tìm ra ai là Ma Sói lẫn trong đám đông Tất cả đều có thể nói thật, nói dối, biện hộ, thuyết
+        phục,...nhưng cuối cùng phải quyết định xử tử một người bằng cách bỏ phiếu.Người bị nhiều người chọn nhất phải chết
+        trên giàn treo tử thần. Ngày tàn, đêm đến, câu chuyện cứ tiếp tục như vậy cho đến khi người dân chết hêt, hoặc lũ
+        Ma Sói bị tiêu diệt Ai là ai? Chỉ bạn mới có thể trả lời câu hỏi đó, trong trò chơi bí ẩn và nổi tiếng thế giới này..."
+      </blockquote>
+    </div>
+  </div>
+  <div class="menu">
+    <button class="my-btn active-btn" onClick={showRule()}>LUẬT CHƠI</button>
+    <button class="my-btn" onClick={showCharacter()}>NHÂN VẬT</button>
+  </div>
+  <div id="ruleBlock" class="rule">
+    <p>
+      <strong> Ban đêm</strong>: Mọi người nhắm mắt! Quản Trò gọi tên vai trò nào thì vai trò ấy mở mắt và thực hiện chức năng của
+      mình
+      <strong>trong-yên-lặng.</strong>
+      Đàn sói chọn 1 người để giết và tính theo đa số, nếu huề thì xem như 1 đêm không cắn. Quản trò sẽ gọi các chức năng dậy
+      <strong>lần lượt</strong> theo thứ tự để thực hiện chức năng.</p>
+    <p> -
+      <strong>Ban ngày</strong>: Đầu ngày, quản trò sẽ thông báo những ai đã chết và sẽ thu lại lá bài của những người đó (không
+      tiết lộ thân phận người chết). Sau đó, những người còn lại sẽ có từ 3~7 phút (tùy thuộc số lượng người chơi) để thảo
+      luận. Sau khi hết thời gian thảo luận, Quản trò nói:
+      <strong>“Nghi ngờ ai chỉ người đó!”</strong>, mọi người phải giữ nguyên tay để Quản trò tính phiếu, ai bỏ tay xuống xem như
+      mất phiếu, người chơi có số phiếu nhiều nhất sẽ bị lên giàn. Nếu số phiếu chỉ huề hoặc số lượng phiếu không vượt quá
+      bán (ví dụ: có 9 người chơi, mà chỉ có 4 phiếu) thì sẽ không có ai bị lên giàn.</p>
+    <p> -
+      <strong>Lên giàn:</strong> Người chơi bị lên giàn có 2 phút để tự biện hộ cho bản thân rằng mình không phải Ma sói và để những
+      người khác tương tác. Chỉ có người lên giàn mới có quyền cho ai tương tác. Nếu không được người lên giàn cho phép nhưng
+      vẫn nói chuyện sẽ bị mất quyền biểu quyết. Hết 2 phút tương tác, Quản trò nói:
+      <strong> “GIẾT HOẶC CỨU!”.</strong> Kết quả sẽ lấy theo số lượng đông hơn, nếu Huề hoặc số phiếu Cứu nhiều hơn thì người lên
+      giàn sống.</p>
+    <p> -
+      <strong>Dân làng</strong> sẽ thắng khi giết được hết số lượng sói trong làng.
+      <br/> -
+      <strong> Sói </strong> thắng khi số lượng sói bằng số lượng dân làng.
+      <br/> -
+      <strong>Phe thứ 3 (nếu có)</strong>thắng khi Dân làng và Sói chết hết.
+      <br/>
+    </p>
+
+  </div>
+  <div id="characterBlock" class="role-container">
+    <div id="myBtnContainer">
+      <button class="btn active" onclick="filterSelection('all')">Tất cả</button>
+      <button class="btn" onclick="filterSelection('wolf')"> Phe sói</button>
+      <button class="btn" onclick="filterSelection('villager')"> Phe dân</button>
+      <button class="btn" onclick="filterSelection('third')"> Phe Thứ 3</button>
+    </div>
+    <div class="container">
+      <div class="filterDiv wolf">
+        <img src="./wolf.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Sói</h4>
+          Chức năng: Giết dân làng.
+          <br/> Mô tả: Mỗi đêm, quản trò gọi Ma Sói dậy và Ma Sói sẽ chọn 1 dân làng để giết.
+          <br/> Lưu ý: Ma Sói có thể chọn không cắn. Ma Sói có thể tự cắn nhau (tự sát).
+          <br/> Lời khuyên: Sói nên có sự phối hợp với nhau thật tốt, cố gắng tìm ra người cần thiết để cắn trong đêm.
+        </div>
+        <div class="badge">-6</div>
+      </div>
+      <div class="filterDiv villager">
+        <img src="./danlang.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Dân làng</h4>
+          Chức năng: Suy luận đoán ra ai là Sói để treo cổ vào buổi sáng.
+          <br/> Mô tả: Dân làng cùng với những người có chức năng tìm cách lập luận và suy đoán ra đâu là Sói đang ẩn mình dưới
+          lớp người.</br>
+          Lưu ý: Có nhiều thời gian và có nhiều cơ hội suy đoán hơn tất cả.</br>
+          Lời khuyên: Đừng để vai trò dân làng của bạn trở nên vô ích. Bạn có thể treo cổ Sói.
+        </div>
+        <div class="badge">1</div>
+      </div>
+      <div class="filterDiv villager">
+        <img src="./phuthuy.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Phù Thủy</h4>
+          Chức năng: Tìm ma sói.
+          <br/> Mô tả: Mỗi đêm, quản trò gọi Nhà tiên tri dậy. Nhà tiên tri sẽ chọn 1 người chơi để đoán, nếu đó là Sói, quản
+          trò sẽ giơ ngón tay cái lên, ngược lại, nếu không phải thì quản trò sẽ lắc tay.
+          <br/> Lời khuyên: Cố gắng quan sát để tìm ra sói trong đêm, ban ngày cố gắng thuyết phục mọi người và ra mặt đúng lúc.
+          <br/>
+          <div class="badge">4</div>
+        </div>
+      </div>
+      <div class="filterDiv wolf">
+        <img src="./phanboi.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Bán Sói</h4>
+          Chức năng: là một dân làng bình thuờng nhưng nếu bị sói cắn sẽ không chết mà sẽ trở thành sói trong những đêm sau.
+          <br/> Mô tả: Là một người dân, nhưng theo phe sói.
+          <br/> Lưu ý: Mỗi đêm quản trò sẽ gọi Bán sói dậy nếu quản trò gật đầu thì đêm sau sẽ thức dậy cùng với sói.
+        </div>
+        <div class="badge">--</div>
+      </div>
+      <div class="filterDiv villager">
+        <img src="./tien-tri.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Tiên Tri</h4>
+          Chức năng: Tìm ma sói.
+          <br/> Mô tả: Mỗi đêm, quản trò gọi Nhà tiên tri dậy. Nhà tiên tri sẽ chọn 1 người chơi để đoán, nếu đó là Sói, quản
+          trò sẽ giơ ngón tay cái lên, ngược lại, nếu không phải thì quản trò sẽ lắc tay.
+          <br/> Lời khuyên: Cố gắng quan sát để tìm ra sói trong đêm, ban ngày cố gắng thuyết phục mọi người và ra mặt đúng lúc.
+          <br/>
+        </div>
+        <div class="badge">7</div>
+      </div>
+      <div class="filterDiv third">
+        <img src="./cupid.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Cupid</h4>
+          Chức năng: Ghép đôi 2 nhân vật ngẫu nhiên lại với nhau. Nếu 1 người + 1 sói sẽ trở thành phe thứ 3.
+          <br/> Mô tả: Quản trò sẽ gọi Thần Tình Yêu dậy vào đêm đầu tiên. Thần Tình Yêu sẽ chọn 2 người trong làng bất kỳ yêu
+          nhau. Khi 1 trong 2 bị chết với bất kỳ lý do nào, cả 2 phải cùng chết! Hai người ghép đôi sẽ được quản trò chạm
+          nhẹ để 2 người mở mắt và biết nhân vật của nhau.
+          <br/> Lưu ý: Thần Tình Yêu có thể tự ghép chính mình.
+        </div>
+        <div class="badge">-3</div>
+      </div>
+      <div class="filterDiv villager">
+        <img src="./baove.jpg" class="img-responsive" />
+        <div class="description">
+          <h4>Bảo Vệ</h4>
+          Chức năng: Cứu dân làng.
+          <br/> Mô tả: Mỗi đêm, quản trò sẽ gọi bảo vệ dậy. Bảo vệ sẽ chọn một người bất kì mà anh ta nghĩ là bị Sói cắn để bảo
+          vệ. Nếu người anh ta bảo vệ mà bị Sói cắn, sẽ không bị chết vào sáng hôm sau.
+          <br/> Lưu ý: Bảo vệ có quyền tự cứu mình. Bảo vệ không được cứu 1 người 2 lượt liên tiếp.
+          <br/> Lời khuyên: Cố gắng quan sát để cứu được người bị hại và ra mặt đúng lúc.
+        </div>
+        <div class="badge">3</div>
+      </div>
+    </div>
+  </div>
+  <div class="parallax"></div>
+  <script src="myScript.js"></script>
+</body>
+
+</html>
